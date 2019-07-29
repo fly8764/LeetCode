@@ -9,7 +9,6 @@ class Solution:
             return False
         dp = [0]*n
         dp[0] = 1
-        i = 1
         id2 = id3 = id5 = 0
         for i in range(1,n):
             min_ = min(dp[id2]*2,dp[id3]*3,dp[id5]*5)
@@ -18,6 +17,24 @@ class Solution:
             if min_ == dp[id3]*3:
                 id3 += 1
             if min_ == dp[id5]*5:
+                id5 += 1
+            dp[i] = min_
+        return dp[-1]
+
+    def GetUglyNumber_Solution(self, index):
+        # write code here
+        if index < 1:
+            return False
+        dp = [0] * index
+        dp[0] = 1
+        id2 = id3 = id5 = 0
+        for i in range(1, index):
+            min_ = min(dp[id2] * 2, dp[id3] * 3, dp[id5] * 5)
+            if min_ == dp[id2] * 2:
+                id2 += 1
+            if min_ == dp[id3] * 3:
+                id3 += 1
+            if min_ == dp[id5] * 5:
                 id5 += 1
             dp[i] = min_
         return dp[-1]
@@ -46,4 +63,7 @@ if __name__ == '__main__':
     so = Solution()
     res = so.nthUglyNumber(253)
     print(res)
+    res = so.GetUglyNumber_Solution(253)
+    print(res)
+
 
