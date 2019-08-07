@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0790b970-66e5-4027-9fce-e5fd2f44fbc0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bit Manipulation/397 integerReplacement.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bit Manipulation/397 integerReplacement.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -85,8 +84,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="235" />
-    <option name="y" value="48" />
+    <option name="x" value="187" />
+    <option name="y" value="58" />
     <option name="width" value="991" />
     <option name="height" value="705" />
   </component>
@@ -134,7 +133,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.397 integerReplacement">
+  <component name="RunManager" selected="Python.dj_01">
     <configuration name="1 twoSum" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="leetcode" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -148,27 +147,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Bit Manipulation/1 twoSum.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="326 isPowerOfThree" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="leetcode" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Bit Manipulation" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Bit Manipulation/326 isPowerOfThree.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -240,20 +218,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="dj_01" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="leetcode" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/exam" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exam/dj_01.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.342 isPowerOfFour" />
-      <item itemvalue="Python.326 isPowerOfThree" />
-      <item itemvalue="Python.389 findTheDifference" />
       <item itemvalue="Python.1 twoSum" />
+      <item itemvalue="Python.342 isPowerOfFour" />
+      <item itemvalue="Python.389 findTheDifference" />
       <item itemvalue="Python.397 integerReplacement" />
+      <item itemvalue="Python.dj_01" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.dj_01" />
         <item itemvalue="Python.397 integerReplacement" />
         <item itemvalue="Python.1 twoSum" />
         <item itemvalue="Python.389 findTheDifference" />
         <item itemvalue="Python.342 isPowerOfFour" />
-        <item itemvalue="Python.326 isPowerOfThree" />
       </list>
     </recent_temporary>
   </component>
@@ -295,7 +294,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="235" y="48" width="991" height="705" extended-state="0" />
+    <frame x="187" y="58" width="991" height="705" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29485834" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
