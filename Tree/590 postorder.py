@@ -9,7 +9,19 @@ class Node:
 
 class Solution:
     def postorder(self, root):
-        pass
+        if not root:
+            return []
+        stack,res = [root,],[]
+        while stack:
+            node = stack.pop()
+            res.append(node.val)
+            if node.children:
+                for child in node.children:
+                    if child:
+                        stack.append(child)
+        return res[::-1]
+
+
 
     # def postorder(self, root):
     #     if not root:
