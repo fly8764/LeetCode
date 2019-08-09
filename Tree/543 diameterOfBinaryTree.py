@@ -26,45 +26,45 @@ class Solution(object):
         return self.dia
 
 
-    def depth(self,root):
-        if not root:
-            return 0
-        parent = [root]
-        cnt = 0
-        while parent:
-            cur = []
-            cnt += 1
-            for node in parent:
-                if node.left:
-                    cur.append(node.left)
-                if node.right:
-                    cur.append(node.right)
-            parent = cur[:]
-        return cnt
+    # def depth(self,root):
+    #     if not root:
+    #         return 0
+    #     parent = [root]
+    #     cnt = 0
+    #     while parent:
+    #         cur = []
+    #         cnt += 1
+    #         for node in parent:
+    #             if node.left:
+    #                 cur.append(node.left)
+    #             if node.right:
+    #                 cur.append(node.right)
+    #         parent = cur[:]
+    #     return cnt
 
 
-    def diameterOfBinaryTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        dia = 0
-        if not root:
-            return dia
-
-        parent = [root]
-        while parent:
-            cur = []
-            for node in parent:
-                left_h,right_h = 0,0
-                if node.left:
-                    cur.append(node.left)
-                    left_h = self.depth(node.left)
-                if node.right:
-                    cur.append(node.right)
-                    right_h = self.depth(node.right)
-                dia = max(dia,left_h+right_h)
-            parent = cur[:]
-        return dia
+    # def diameterOfBinaryTree(self, root):
+    #     """
+    #     :type root: TreeNode
+    #     :rtype: int
+    #     """
+    #     dia = 0
+    #     if not root:
+    #         return dia
+    #
+    #     parent = [root]
+    #     while parent:
+    #         cur = []
+    #         for node in parent:
+    #             left_h,right_h = 0,0
+    #             if node.left:
+    #                 cur.append(node.left)
+    #                 left_h = self.depth(node.left)
+    #             if node.right:
+    #                 cur.append(node.right)
+    #                 right_h = self.depth(node.right)
+    #             dia = max(dia,left_h+right_h)
+    #         parent = cur[:]
+    #     return dia
 
 

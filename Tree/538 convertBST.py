@@ -5,28 +5,21 @@
 #         self.left = None
 #         self.right = None
 
+
 class Solution(object):
     def convertBST(self, root):
         """
         :type root: TreeNode
-        :rtype: TreeNode
+        :rtype: List[int]
         """
-        if not root:
-            return
-        if root.right:
-            self.convertBST(root.right)
-            if root.right.left:#这个是root 右子树中的最小节点
-                root.val += root.right.left.val
-            else:
-                root.val += root.right.val
-
-        if root.left:
-            # root.left.val += root.val
-            if root.left.right:
-                #这个是root左子树中的最大值，仅次于root，要把root的值加到其左子树的最大值中，如何加过取去
-                root.left.right.val += root.val
-            else:#
-                root.left.val += root.val
-            self.convertBST(root.left)
+        self.dfs(root,0)
         return root
 
+    def dfs(self,root,n):
+        #temp 是大于 root树的最小值，比如 对于左子树 是其根节点
+        if not root:
+            return n
+        temp = self.dfs(root.right,n) #返回右子树中的最小值，即左子树中最左下角的结点值
+        root.val += temp #root节点加上其右子树中的最小值
+        temp = self.dfs(root.left,root.val) #将父节点的值加入其左子树中，是大于其左子树的值的最小值
+        return temp
