@@ -20,7 +20,6 @@ class Solution:
             if not stack:
                 return res
             root = stack.pop()
-        return res
 
 
     # def preorderTraversal(self, root):
