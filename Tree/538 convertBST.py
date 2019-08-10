@@ -6,7 +6,7 @@
 #         self.right = None
 
 
-class Solution(object):
+class Solution:
     def convertBST(self, root):
         """
         :type root: TreeNode
