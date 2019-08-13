@@ -11,7 +11,7 @@
 #每次递归返回 当前有没有找到p or q，返回给上层 递归看
 #注意 题目中给的p，q是树节点，而不是值
 
-
+#测试
 class Solution:
     def lowestCommonAncestor(self, root, p, q):
         self.res = None
