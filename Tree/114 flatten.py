@@ -1,95 +1,46 @@
 # Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
-#方法一：先序遍历 找到对应节点，同时把节点串接在 上个节点右节点上
-class Solution:
-    # def flatten(self, root):
-    #     #一边遍历，一边修改节点
-    #     if not root:
-    #         return
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
+class Solution:
     def flatten(self, root):
         if not root:
             return
         pre = None
-        def dfs(root):
-            if not root:
+        stack = []
+
+        while True:
+            while root:
+                if pre:
+                    pre.right,pre.left = root,None
+                pre = root
+                stack.append(root.right)
+                root = root.left
+            if not stack:
                 return
-            if pre:
-                pre.right,pre.left = root,None
-            pre = root
-            right = root.right
-            pre.right = root
-
+            root = stack.pop()
 
 
     # def flatten(self, root):
+    #     #一边遍历，一边修改指针，要使用前向节点
     #     """
     #     Do not return anything, modify root in-place instead.
     #     """
-    #     if not root:
-    #         return
-    #     # node = TreeNode(0)
-    #     # ret = node
-    #     res = root
-    #     # res.left = None
-    #     root2 = root
-    #     def dfs(root,ret):
-    #         # res = []
-    #         stack = []
-    #         while True:
-    #             while root:
-    #                 temp = TreeNode(root.val)
-    #                 ret.right = temp
-    #                 ret = temp
-    #                 # res.append(root.val)
-    #                 stack.append(root.right)
-    #                 root = root.left
-    #             if not stack:
-    #                 return
-    #             root = stack.pop()
-    #     dfs(root2,res)
-    #     root.left = None
-        # return node.right
-
-        # res = dfs(root)
-        # root.left = None
-        # temp = root
-        # for item in res[1:]:
-        #     node = TreeNode(item)
-        #     temp.right = node
-        #     temp = node
-
-    # def flatten(self, root):
-    #     """
-    #     Do not return anything, modify root in-place instead.
-    #     """
-    #     if not root:
-    #         return
+    #     self.pre = None
     #
     #     def dfs(root):
-    #         res = []
-    #         stack = []
-    #         while True:
-    #             while root:
-    #                 res.append(root.val)
-    #                 stack.append(root.right)
-    #                 root = root.left
-    #             if not stack:
-    #                return res
-    #             root = stack.pop()
-    #     res = dfs(root)
-    #     root.left = None
-    #     temp = root
-    #     for item in res[1:]:
-    #         node = TreeNode(item)
-    #         temp.right = node
-    #         temp = node
-
-
-
+    #         if not root:
+    #             return
+    #         if self.pre:
+    #             self.pre.right,self.pre.left = root,None
+    #         right = root.right
+    #         self.pre = root
+    #         dfs(root.left)
+    #         dfs(right)
+    #
+    #     dfs(root)
 
 
