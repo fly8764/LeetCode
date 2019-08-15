@@ -25,7 +25,6 @@ class Solution:
 
 
     # def flatten(self, root):
-    #     #一边遍历，一边修改指针，要使用前向节点
     #     """
     #     Do not return anything, modify root in-place instead.
     #     """
