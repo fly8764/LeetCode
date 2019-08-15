@@ -21,6 +21,7 @@ class Solution:
     def dfs(self,root,p,q):
         if not root:
             return 0
+
         left = self.dfs(root.left,p,q)
         right = self.dfs(root.right,p,q)
         mid = root == p or root == q
