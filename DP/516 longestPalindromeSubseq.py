@@ -14,6 +14,7 @@ class Solution:
             dp[r][r] = 1
             # for l in range(r):
             for l in range(r-1,-1,-1):
+                # 因为这里是 回文子序列，不要求是连续子串，所以，下面的判断条件不同
                 #右边界确定后，左边逐渐往左去，而不是直接从0往右去，
                 if s[l] == s[r]:
                     dp[l][r] = dp[l+1][r-1] + 2

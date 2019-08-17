@@ -23,7 +23,6 @@ class Solution:
     def longestPalindrome(self, s):
         if not s:
             return ''
-
         size = len(s)
         res = s[0] #这里不能直接初始化一个空字符串
         dp = [[0]*size for _ in range(size)]
@@ -37,10 +36,6 @@ class Solution:
                         max_len = r-l+1
                         res = s[l:r+1]
         return res
-
-                # if dp[l][r] and
-
-
 
 if __name__ == '__main__':
     so = Solution()
