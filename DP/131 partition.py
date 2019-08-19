@@ -39,7 +39,7 @@ class Solution:
     #         left += 1
     #         right -= 1
     #     return False
-    #
+
     def dfs(self,s,cur):
         size = len(s)
         if not size:
