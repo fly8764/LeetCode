@@ -8,7 +8,7 @@ class Solution:
         res = []
         for k in range(size-2):
             if nums[k] > 0:break
-            if nums[k] == nums[k-1] and k >0:continue
+            if nums[k] == nums[k-1] and k >0:continue #这个细节非常重要
             i,j  = k+1,size-1
             while i < j:
                 s = nums[k] + nums[i] + nums[j]

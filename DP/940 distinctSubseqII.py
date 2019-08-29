@@ -1,3 +1,4 @@
 class Solution:
-    def distinctSubseqII(self, S):
+    def distinctSubseqII(self, s):
         pass
+
