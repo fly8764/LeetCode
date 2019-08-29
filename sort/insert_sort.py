@@ -96,23 +96,52 @@ class Solution:
         nums[i] = nums[j]
         nums[j] = temp
 
-    def partion(self,nums,s,t):
-        povit = s
-        index = povit + 1
-        temp = nums[povit]
-        for i in range(povit+1,t+1):
+    def partition(self,nums,s,t):
+        #从左往右逐个扫描，而不是像上面那个解法，左右两边同时向中间扫描，直到相等
+        pivot = s
+        index = pivot + 1
+        temp = nums[pivot]
+        for i in range(pivot+1,t+1):
             if nums[i] < temp:
                 self.swap(nums,i,index)
                 index += 1
-        self.swap(nums,povit,index-1)
+        self.swap(nums,pivot,index-1)
         return index - 1
 
     def quickSort(self,nums,s,t):
         if s == t:return nums
         elif s < t:
-            povit = self.partion(nums, s, t)
-            self.quickSort(nums, s, povit - 1)
-            self.quickSort(nums, povit + 1, t)
+            pivot = self.partition(nums, s, t)
+            self.quickSort(nums, s, pivot - 1)
+            self.quickSort(nums, pivot + 1, t)
+
+    def selectSort(self,nums):
+        #类似于冒泡排序，只不过，是在找到未排列 列表中的最小元素与 表头元素交换
+        size = len(nums)
+
+    def mergeSort(self,nums):
+        #递归,从上到下 递归，从下到上返回；
+        #递归题目：先假设 递归函数存在，拿过来直接用；然后，考虑如何处理边界情况
+        size = len(nums)
+        if size < 2:return nums
+        mid = size//2
+        left = nums[:mid]
+        right = nums[mid:]
+        return self.merge(self.mergeSort(left),self.mergeSort(right))
+
+    def merge(self,left,right):
+        res = []
+        while left and right:
+            if left[0] < right[0]:
+                res.append(left.pop(0))
+            else:
+                res.append(right.pop(0))
+        while left:
+            res.append(left.pop(0))
+        while right:
+            res.append(right.pop(0))
+        return res
+
 
 
 
@@ -139,3 +168,5 @@ if __name__ == '__main__':
     # print(res3,'bubbleSort')
     # so.quickSort(nums,0,len(nums)-1)
     # print(nums)
+    res = so.mergeSort(nums)
+    print(res)
