@@ -1,4 +1,7 @@
 class Solution:
+    def __init__(self):
+        self.size = 0
+
     def insetSort(self,nums):
         #T(n) = n**2
         #从前往后遍历
@@ -142,23 +145,95 @@ class Solution:
             res.append(right.pop(0))
         return res
 
+    def buildMaxheap(self,nums):
+        #这里从size//2开始往前遍历有两个好处
+        #1.类似于从完全二叉树的倒数第二层开始调整堆，2*i+1 2*i+2保证能到达最后面的元素
+        #2.从后往前，从下往上，能保证最大的元素在堆顶。类似于冒泡
+        self.size = len(nums)
+        for i in range(self.size//2,-1,-1):
+            self.heapify(nums,i)
 
+    def heapify(self,nums,i):
+        left = 2*i + 1
+        right = 2*i + 2
+        largest = i
 
+        if left < self.size and nums[left] > nums[largest]: largest = left
+        if right < self.size and  nums[right] > nums[largest]: largest = right
+        if largest != i:
+            self.swap(nums, i, largest)
+            self.heapify(nums, largest)
 
+    def heapSort(self,nums):
+        #最大堆排序
+        self.bubbleSort(nums)
+        for i in range(self.size-1,0,-1):
+            #把堆顶元素放到后面，最小元素放在堆顶，后面再重新调整堆；同时为处理的列表长度减1
+            self.swap(nums,0,i)
+            self.size -= 1
+            #从堆顶开始重新调整堆，原先的堆整体往上升了一层
+            self.heapify(nums,0)
+        return nums
 
+    def buildMinheap(self,nums):
+        self.size = len(nums)
+        for i in range(self.size//2,-1,-1):
+            self.heapifyMin(nums,i)
 
+    def heapifyMin(self,nums,i):
+        left = 2*i + 1
+        right = 2*i + 2
+        least = i
+        if left < self.size and nums[left] < nums[least]: least = left
+        if right < self.size and nums[right] < nums[least]:least = right
+        if least != i:
+            self.swap(nums,i,least)
+            self.heapifyMin(nums,least)
 
+    def heapSortMin(self,nums):
+        #要保证 不改变 完全二叉树的 结构，因为在调整堆时，有 left = 2*i + 1 等的存在，要用到堆的结构
+        #因此，最小堆排序只能 额外申请一个数组，每次保存 堆顶的最小值，
+        #之后把右小角的值 交换到 堆顶，删除末尾元素，修改堆的长度，再次调整堆
+        res = []
+        self.buildMinheap(nums)
+        for i in range(self.size):
+            res.append(nums[0])
+            #把最大元素放到堆顶，之后删掉最后一个元素，修改堆的长度
+            self.swap(nums,0,self.size-1)
+            nums.pop()
+            self.size -= 1
+            self.heapifyMin(nums,0)
+        return res
 
-
-
-
-
+    def radixSort(self,nums):
+        maxx = max(nums)
+        bit = 0
+        while maxx:
+            bit += 1
+            maxx //= 10
+        mod = 10
+        dev = 1
+        for i in range(bit):
+            temp = {}
+            for j in range(len(nums)):
+                bucket = nums[j]%mod//dev
+                if bucket not in temp:
+                    temp[bucket] = []
+                temp[bucket].append(nums[j])
+            cur = []
+            for idx in range(10):
+                if idx in temp:
+                    cur.extend(temp[idx])
+            nums = cur[:]
+            mod *= 10
+            dev *= 10
+        return nums
 
 
 if __name__ == '__main__':
     so = Solution()
     nums = [4,1,5,3,8,10,28,2]
-    print(nums)
+    print(nums,'raw')
     print(sorted(nums),'gt')
     # res = so.insetSort(nums[:])
     # print(res)
@@ -168,5 +243,11 @@ if __name__ == '__main__':
     # print(res3,'bubbleSort')
     # so.quickSort(nums,0,len(nums)-1)
     # print(nums)
-    res = so.mergeSort(nums)
+    # res = so.mergeSort(nums)
+    # print(res)
+    # res = so.heapSort(nums[:])
+    # print(res)
+    # res = so.heapSortMin(nums[:])
+    # print(res)
+    res = so.radixSort(nums[:])
     print(res)
