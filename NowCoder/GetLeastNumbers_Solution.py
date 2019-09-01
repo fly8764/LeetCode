@@ -4,6 +4,7 @@
 class Solution:
     def __init__(self):
         self.size = 0
+        self.k = 0
 
     def swap(self,nums,i,j):
         temp = nums[i]
@@ -44,8 +45,56 @@ class Solution:
     #         self.heapify(nums,0)
     #     return res
 
+    def partiton(self,nums,s,t):
+        temp = nums[s]
+        index = s+1
+        if s < t:
+            for i in range(s+1,t+1):
+                if nums[i] < temp:
+                    self.swap(nums,i,index)
+                    index += 1
+            self.swap(nums,s,index-1)
+        return index - 1
+
+    def quickSort(self,nums,s,t):
+        if s == t:return
+        elif s < t:
+            pivot = self.partiton(nums,s,t)
+            self.quickSort(nums, s, pivot - 1)
+            self.quickSort(nums, pivot + 1, t)
+
+        #不要把partition写在里面，不然变量的作用范围容易受到影响；
+        #最好写在外面
+        # temp = nums[s]
+        # index = s+1
+        # if s < t:
+        #     for i in range(s+1,t+1):
+        #         if nums[i] < temp:
+        #             self.swap(nums,i,index)
+        #             index += 1
+        #     self.swap(nums,s,index-1)
+        #
+        # pviot = index - 1
+        # self.quickSort(nums,s,pviot-1)
+        # self.quickSort(nums,pviot+1,t)
+
     def GetLeastNumbers_Solution(self, nums, k):
-        pass
+        #剑指offer上的解法一 牛客网超时
+        if nums == [] or len(nums) < k:return []
+        s = 0
+        end = len(nums) -1
+        index = self.partiton(nums,s,end)
+        while index != k -1:
+            if index < k-1:
+                s = index +1
+                index = self.partiton(nums,s,end)
+            else:
+                end = index - 1
+                index = self.partiton(nums,s,end)
+
+        return nums[:k]
+
+
 
 
 if __name__ == '__main__':
@@ -54,3 +103,5 @@ if __name__ == '__main__':
     k = 4
     res = so.GetLeastNumbers_Solution(nums,k)
     print(res)
+    # so.quickSort(nums,0,len(nums)-1)
+    # print(nums)

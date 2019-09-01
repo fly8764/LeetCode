@@ -116,6 +116,8 @@ class Solution:
     def quickSort(self,nums,s,t):
         if s == t:return nums
         elif s < t:
+            # 不要把partition写在里面，不然变量的作用范围容易受到影响；
+            # 最好写在外面
             pivot = self.partition(nums, s, t)
             self.quickSort(nums, s, pivot - 1)
             self.quickSort(nums, pivot + 1, t)
