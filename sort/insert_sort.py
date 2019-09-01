@@ -70,6 +70,7 @@ class Solution:
         # left = self.quickSort(left_sub)
         # right = self.quickSort(right_sub)
         # return left+[temp] + right
+
     # def quickSort(self,nums,s,t):
     #     left = s
     #     right = t
@@ -78,7 +79,8 @@ class Solution:
     #         while left < right: #从两边往中间扫描，直到left == right
     #             while right > left and nums[right] > temp:
     #                 right -= 1
-    #             if left < right: #先不管 nums[left]的大小如何，先交换到右边的nums[right]再说，到那边再比较
+    #             if left < right: #看是上面哪个条件跳出来的
+    #             先不管 nums[left]的大小如何，先交换到右边的nums[right]再说，到那边再比较
     #                 tmp = nums[left]
     #                 nums[left] = nums[right]
     #                 nums[right] = tmp
@@ -147,8 +149,8 @@ class Solution:
 
     def buildMaxheap(self,nums):
         #这里从size//2开始往前遍历有两个好处
-        #1.类似于从完全二叉树的倒数第二层开始调整堆，2*i+1 2*i+2保证能到达最后面的元素
-        #2.从后往前，从下往上，能保证最大的元素在堆顶。类似于冒泡
+        #1.类似于从完全二叉树的倒数第二层开始调整堆，2*i+1 2*i+2分别对应 节点i的左右子节点
+        #2.从后往前，从下往上，一层一层地“筛选”，保证最大的元素在堆顶。类似于冒泡
         self.size = len(nums)
         for i in range(self.size//2,-1,-1):
             self.heapify(nums,i)
@@ -161,6 +163,7 @@ class Solution:
         if left < self.size and nums[left] > nums[largest]: largest = left
         if right < self.size and  nums[right] > nums[largest]: largest = right
         if largest != i:
+            #继续递归，使得上面调整后，下面的堆 仍然符合最大/小 堆的要求
             self.swap(nums, i, largest)
             self.heapify(nums, largest)
 
@@ -191,6 +194,7 @@ class Solution:
             self.heapifyMin(nums,least)
 
     def heapSortMin(self,nums):
+        #T(n) = (n/2)logn + nlogn
         #要保证 不改变 完全二叉树的 结构，因为在调整堆时，有 left = 2*i + 1 等的存在，要用到堆的结构
         #因此，最小堆排序只能 额外申请一个数组，每次保存 堆顶的最小值，
         #之后把右小角的值 交换到 堆顶，删除末尾元素，修改堆的长度，再次调整堆
