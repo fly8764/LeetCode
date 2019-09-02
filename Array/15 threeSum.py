@@ -1,4 +1,5 @@
 class Solution:
+    #数组排序，然后左右指针向中间移动，根据 和与目标值的大小来判断左右指针的移动情况
     #双指针的前提：有序数组，所以要先 排序，注意排除相同值的情况，左移或者右移后，
     #如果和上次的相同，则再移动一次
     def threeSum(self, nums):
@@ -9,7 +10,7 @@ class Solution:
         for k in range(size-2):
             if nums[k] > 0:break
             if nums[k] == nums[k-1] and k >0:continue #这个细节非常重要
-            i,j  = k+1,size-1
+            i,j  = k+1,size-1 #两边同时向中间移动(双指针)
             while i < j:
                 s = nums[k] + nums[i] + nums[j]
                 if s == 0:
