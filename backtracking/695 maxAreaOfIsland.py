@@ -1,6 +1,6 @@
 class Solution():
-    # def __init__(self):
-    #     pass
+    def __init__(self):
+        pass
 
     def inarea(self,i,j):
         if 0<= i and i< self.m and j >= 0 and  j < self.n:
@@ -17,7 +17,7 @@ class Solution():
             if self.inarea(x,y) and not self.marked[x][y] and self.grid[x][y]:
                 self.dfs(x,y)
 
-    def find(self,grid):
+    def maxAreaOfIsland(self,grid):
         self.grid = grid
         self.m = len(grid)
         if self.m < 1:
@@ -40,28 +40,3 @@ class Solution():
 
         return max_
 
-
-if __name__ == '__main__':
-    line = list(map(int,input().split(',')))
-    m,n = line[0],line[1]
-
-    grid = []
-    for _ in range(m):
-        nums = list(map(int,input().split(',')))
-        grid.append(nums)
-    # print(grid)
-
-    so = Solution()
-    res = so.find(grid)
-    print(res)
-
-
-
-
-
-
-# 4,5
-# 1,1,1,0,0
-# 0,0,1,0,0
-# 1,1,0,0,0
-# 1,0,0,0,0
