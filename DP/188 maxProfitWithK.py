@@ -1,50 +1,76 @@
-class Solution:
-    def maxProfit(self, k, prices):
-        length = len(prices)
+# class Solution:
+#     def maxProfit(self, k, prices):
+#         length = len(prices)
+#
+#         if length < 2:
+#             return  0
+#
+#         if k < length//2:
+#             dp = [[-prices[0],0] for _ in range(k+1)]
+#             for price in prices[1:]:
+#                 for i in range(1,k+1):
+#                     dp[i][0] = max(dp[i][0],dp[i-1][1]-price)
+#                     dp[i][1] = max(dp[i][1],dp[i][0]+price)
+#             return dp[k][1]
+#         else:
+#             dp = [-prices[0],0]
+#             for price in prices[1:]:
+#                 dp = [max(dp[0],dp[1]-price),max(dp[1],dp[0]+price)]
+#             return dp[1]
+#
+#     # def maxProfit(self, k, prices):
+#     #     length = len(prices)
+#     #     dp = [[[0, -99999] for _ in range(k + 1)] for _ in range(length+1)]
+#     #
+#     #     if k > length // 2:
+#     #         return self.maxProfit_k_inf(prices)
+#     #
+#     #     for i in range(1, length+1):
+#     #         for j in range(1, k + 1):
+#     #             dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i-1])
+#     #             dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i-1])
+#     #
+#     #     return dp[length][k][0]
+#
+#
+#     def maxProfit_k_inf(self, prices):
+#         length = len(prices)
+#
+#         dp_0 = 0
+#         dp_1 = -99999
+#
+#         for i in range(length):
+#             temp = dp_0
+#             dp_0 = max(dp_0, dp_1 + prices[i])
+#             dp_1 = max(dp_1, temp - prices[i])
+#
+#         return dp_0
 
-        if length < 2:
-            return  0
-
-        if k < length//2:
-            dp = [[-prices[0],0] for _ in range(k+1)]
-            for price in prices[1:]:
-                for i in range(1,k+1):
-                    dp[i][0] = max(dp[i][0],dp[i-1][1]-price)
-                    dp[i][1] = max(dp[i][1],dp[i][0]+price)
-            return dp[k][1]
-        else:
-            dp = [-prices[0],0]
-            for price in prices[1:]:
-                dp = [max(dp[0],dp[1]-price),max(dp[1],dp[0]+price)]
-            return dp[1]
-
-    # def maxProfit(self, k, prices):
-    #     length = len(prices)
-    #     dp = [[[0, -99999] for _ in range(k + 1)] for _ in range(length+1)]
-    #
-    #     if k > length // 2:
-    #         return self.maxProfit_k_inf(prices)
-    #
-    #     for i in range(1, length+1):
-    #         for j in range(1, k + 1):
-    #             dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i-1])
-    #             dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i-1])
-    #
-    #     return dp[length][k][0]
-
-
+#second
+class Solution():
     def maxProfit_k_inf(self, prices):
-        length = len(prices)
-
+        size = len(prices)
         dp_0 = 0
-        dp_1 = -99999
+        dp_1 = float('-inf')
 
-        for i in range(length):
-            temp = dp_0
+        for i in range(size):
             dp_0 = max(dp_0, dp_1 + prices[i])
-            dp_1 = max(dp_1, temp - prices[i])
+            dp_1 = max(dp_1, dp_0 - prices[i])
 
         return dp_0
+
+    def maxProfit(self, k, prices):
+        size = len(k)
+        if k > size//2:
+            return self.maxProfit_k_inf(prices)
+
+        dp = [[0]*k for _ in range(size)]
+
+        for i in range(size):
+            for k in range(k,0,-1):
+                pass
+
+
 
 
 if __name__ == '__main__':
