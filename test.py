@@ -1,4 +1,7 @@
 import functools
+import tensorflow as tf
+
+a = tf.nn.conv2d()
 
 
 class Solution:

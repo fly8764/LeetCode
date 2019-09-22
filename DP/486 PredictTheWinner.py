@@ -38,12 +38,12 @@
 对于奇数，就比较麻烦了，每次都会动态变化，先手上来只能取奇数列，后手 可以取 奇偶列；后手的每个决定都会
 影响后面的操作，所以，上面偶数的解法行不通了。
 dp[i][j]:表示nums[i:j+1]序列 先手比后手多出来的分数；
-nums[i:j+1]:对于两端的值，当先手A取nums[i]时，nums[i+1:j+1]中 A就不是先后了，B是先手了，因为A先取了nums[i];
+nums[i:j+1]:对于两端的值，当先手A取nums[i]时，nums[i+1:j+1]中 A就不是先手了，B是先手了，因为A先取了nums[i];
 所以要比较先手A的优势nums[i] 和B在 nums[i+1:j+1]的优势dp[i+1][j]，做差比较 nums[i] - dp[i+1][j]
 同理，当A取nums[ｊ]时，nums[i:j]中 A就不是先后了，B是先手了，比较优势 nums[j] - dp[i][j-1]
 最终 dp[i][j] = max(nums[i] - dp[i+1][j],nums[j] - dp[i][j-1]),nums[i:j+1]范围内，先手的优势
 '''
-#左边界l 从右往左；有边界从l+1到n；整体上 从右往左进行遍历循环
+#左边界l 从右往左；右边界从l+1到n；整体上 从右往左进行遍历循环
 class Solution:
     # def PredictTheWinner(self, nums):
     #     size = len(nums)

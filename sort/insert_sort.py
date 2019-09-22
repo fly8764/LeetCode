@@ -72,6 +72,9 @@ class Solution:
         # return left+[temp] + right
 
     # def quickSort(self,nums,s,t):
+    #这里理解错了，
+    #实际上，每次swap 都是在调整 pivot的位置，当左右指针相等时，pivot的位置也调整好了，
+    #不用在最后再次调整 开头与i的位置元素，即 nums[left] = temp
     #     left = s
     #     right = t
     #     if s < t:
@@ -92,7 +95,7 @@ class Solution:
     #                 nums[right] = nums[left]
     #                 nums[left] = tmp
     #                 right -= 1
-    #         nums[left] = temp
+    #         nums[left] = temp #这一步不需要
     #         self.quickSort(nums,s,left-1)
     #         self.quickSort(nums,left+1,t)
 
@@ -103,6 +106,7 @@ class Solution:
 
     def partition(self,nums,s,t):
         #从左往右逐个扫描，而不是像上面那个解法，左右两边同时向中间扫描，直到相等
+        #这种方法 每次需要调整位置时，都要交换一次位置，操作数比较多
         pivot = s
         index = pivot + 1
         temp = nums[pivot]
