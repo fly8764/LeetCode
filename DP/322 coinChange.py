@@ -25,10 +25,46 @@ class Solution:
         #能不能凑齐呢？比如 7=5+2，用了硬币5，那4,3就没法凑齐，
         # 所以需要i>=j-1,让dp[i]来保证凑齐
 
+class Solution2:
+    def coinChange(self,coins,amount):
+        if amount == 0:
+            return 0
+        dp = [float('inf')]*(amount +1)
+        dp[0] = 0
+        for i in range(1,amount+1):
+            for coin in coins:
+                if coin > amount:
+                    continue
+                dp[i] = min(dp[i],dp[i-coin]+1)
+        if dp[-1] == float('inf'):
+            return -1
+        else:
+            return dp[-1]
+
+'''
+变形，找出最少的硬币--组成所有的面值
+https://www.cnblogs.com/anzhengyu/p/11176134.html
+当可以用硬币直接替换时: dp[i] = min(dp[i-coin] +1,dp[i])
+可以替换的条件是 i-j>= j-1,
+把i分成两部分i-j,j 当j是一种硬币面值时，如果直接替换，要保证i-j能凑出
+j-1的所有面值，即 i-j >= j-1,j直接用硬币即可
+比如 7=5+2，用了硬币5，那4,3就没法凑齐，
+
+当硬币不可以直接替换时 dp[i] = min(dp[i-j]+dp[j],dp[i])
+'''
+class Solution3:
+    def coinChange(self,coin,target):
+        pass
+
 
 if __name__ == '__main__':
     so = Solution()
     coins = [2] #[1, 2, 5]
-    amount = 3 #3 11
+    amount = 3  # 3 11
+    res = so.coinChange(coins,amount)
+    print(res)
+
+    coins = [1, 2, 5]
+    amount = 11
     res = so.coinChange(coins,amount)
     print(res)

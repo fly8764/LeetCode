@@ -1,3 +1,6 @@
+import heapq
+
+
 class Solution:
     # def scheduleCourse(self, courses):
     #     #按照课程的长短来升序排序，课程短的先学习，这种方法通过率更低
@@ -37,19 +40,17 @@ class Solution:
         #如果当前课的时长较短，则剔除已选课程中最大时长课，选择当前课，毕竟选择时长短的课，最终的课程数才多
         #这里就需要用到 优先队列，但python中没有优先队列，只好用 堆排序，默认时最小堆，加个负号，变成“最大堆”
         #时刻修改起始时间
-        n = len(courses)
-        courses.sort(key=lambda x: x[1])
         q = []
         start = 0
-        for item in courses:
-            if start + item[0] <= item[1]:
-                q.append(item[0])
-                start += item[0]
-            elif q and item[0] < q[-1]:
-                #这里别忘了队列不能为空
-                start += item[0] - q[-1]
-                q.pop()
-                q.append(item[0])
+        # courses.sort(key=lambda x:x[1])
+        for t,d in sorted(courses,key=lambda x:x[1]):
+            if start + t <= d:
+                start += t
+                #维持一个最大堆
+                heapq.heappush(q,-t)
+            elif q and t < -q[0]:
+                start += t + heapq.heappop(q)
+                heapq.heappush(q,-t)
         return len(q)
 
 
