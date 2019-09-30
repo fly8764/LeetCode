@@ -36,3 +36,31 @@ class Solution(object):
     #
     #     return res
 
+    def postorder(self,root):
+        res,stack = [],[]
+        p = root
+        while stack:
+            res.append(p.val)
+            if root.left:
+                stack.append(root.left)
+            if root.right:
+                stack.append(root.right)
+            if not stack:
+                p = stack.pop()
+
+        return res[::-1]
+
+    def postorder2(self,root):
+        res = []
+        stack = [root] if root else []
+        while stack:
+            #前序遍历 访问左右节点的顺序改变一下
+            #最后，把得到的res，再反转一下
+            node = stack.pop()
+            res.append(node.val)
+            if node.left:
+                stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
+        return res[::-1]
+

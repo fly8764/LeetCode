@@ -10,7 +10,7 @@ class Solution:
         res, stack = [],[]
         while True:
             # if root:
-            #先把从右往左 把节点入栈,这种写法 看着明了，在N叉树中体现的很重要
+            #从右往左 把节点入栈,这种写法 看着明了，在N叉树中体现的很重要
             if root.right:
                 stack.append(root.right)
             if root.left:
@@ -44,5 +44,40 @@ class Solution:
     #     res += self.preorderTraversal(root.left)
     #     res += self.preorderTraversal(root.right)
     #     return res
+
+class Solution2:
+    def preorder(self,root):
+        if not root:return []
+        res = []
+        stack = []
+        while True:
+            res.append(root.val)
+            if root.right:
+                stack.append(root.right)
+            if root.left:
+                stack.append(root.left)
+
+            if not stack:
+                return res
+            root = stack.pop()
+
+class Solution3:
+    def preorder(self,root):
+        if not root:return []
+        res,stack = [],[]
+        node = root
+        while stack:
+            res.append(node.val)
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+
+            if not stack:
+                return res
+
+            node = stack.pop()
+
+
 
 

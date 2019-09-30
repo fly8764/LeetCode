@@ -1,10 +1,8 @@
-
 # Definition for a Node.
 class Node:
     def __init__(self, val, children):
         self.val = val
         self.children = children
-
 
 class Solution:
     def preorder(self, root):
@@ -27,4 +25,26 @@ class Solution:
     #         for child in children:
     #             res += self.preorder(child)
     #     return res
+
+class Solution2:
+    def preorder(self,root):
+        if not root:return []
+        res = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            res.append(node.val)
+            stack.extend(node.children[::-1])
+        return res
+
+    def preorder2(self,root):
+        res = []
+        stack = [root] if root else []
+
+        while stack:
+            node = stack.pop()
+            res.append(node.val)
+            if node.children:
+                stack.extend(node.children[::-1])
+
 

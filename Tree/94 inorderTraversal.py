@@ -36,3 +36,19 @@ class Solution(object):
         return res
 
 
+class Solution2:
+    def inorder(self,root):
+        res,stack = [],[]
+        p = root
+        while p or stack:
+            while p:
+                #不停的找左子树，依次入栈；出栈时就依次完成遍历
+                stack.append(p)
+                p = p.left
+            node = stack.pop()
+            res.append(node.val)
+            #开始关注右子树，当节点p访问完后，开始转向右子树
+            p = node.right
+        return res
+
+
