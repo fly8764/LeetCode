@@ -1,4 +1,4 @@
-class Solution:
+class Solution1:
     #动态规划 贪心结论 滚动数组
     def integerBreak(self, n):
         dp = [0,1,1]
@@ -24,6 +24,10 @@ class Solution:
     #             dp[i] = max(dp[i],dp[j]*(i-j),j*(i-j))
     #
     #     return dp[n]
+
+class Solution:
+    def integerBreak(self, n):
+        pass
 
 if __name__ == '__main__':
     so = Solution()

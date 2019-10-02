@@ -1,4 +1,4 @@
-class Solution:
+class Solution1:
     #这种动态规划，取最优有些特殊
     # dp[i] = max(dp[i - 2] + nums[i], dp[i - 3] + nums[i])
     # 取当前的nums[i]，肯定比不取要多；
@@ -21,6 +21,20 @@ class Solution:
                 dp[i] = max(dp[i-2],dp[i-3])+nums[i]
 
         return max(dp[-1],dp[-2])
+
+class Solution:
+    def rob(self, nums):
+        size = len(nums)
+        #对于空列表要单独计算
+        if size < 1:return 0
+        if size < 3:return max(nums)
+        dp = [0] * size
+        dp[0] = nums[0]
+        dp[1] = max(nums[0],nums[1])
+        for i in range(2,size):
+            dp[i] = max(dp[i-2]+nums[i],dp[i-1])
+        return dp[-1]
+
 
 if __name__ == '__main__':
         so = Solution()

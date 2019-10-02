@@ -15,8 +15,7 @@
 # 当不选根节点时，左右节点都不一定一定要取，当取左时，右边可取可不取；当不取右边时，貌似可以加根，但是左边不允许；
 # 所以，对于不取根，应该返回 max(l) + max(r);
 
-
-class Solution:
+class Solution1:
     #树上动态规划
     # 当不选根节点时，左右节点都不一定一定要取
     def rob(self, root):
@@ -28,4 +27,48 @@ class Solution:
             return [max(left)+max(right),root.val + left[0] + right[0]]
         res = dfs(root)
 
+        return max(res)
+
+'''
+对于每颗数，其根节点可选，可不选
+设置res[0],res[1] 分别代表不选和选，
+选择了根节点，则不能选择直接孩子节点，即root.val+left[0]+right[0]
+不选，则孩子节点及孙子节点，可选可不选，按照最大来选即可，
+因为，有时孙子节点比孩子节点还大，如果选择了孩子节点，那么孙子节点就不能选了
+'''
+class Solution:
+    def dfs1(self,root):
+        #这种方法不对
+        #错在，认为不选根节点，那么孩子节点一定要选取，这就有些死板，动态的意思不强
+        #孩子节点不一定选取，选择了孩子节点，孙子节点就没法选取，有时孙子节点比孩子节点还大
+        if not root:
+            return 0
+        child  = root.val
+        temp = 0
+        if root.left:
+            temp += root.left.val
+            if root.left.left:
+                child += self.dfs(root.left.left)
+            if root.left.right:
+                child += self.dfs(root.left.right)
+        if root.right:
+            temp += root.right.val
+            if root.right.left:
+                child += self.dfs(root.right.left)
+            if root.right.right:
+                child += self.dfs(root.right.right)
+        return max(child,temp)
+
+        # return max(root.val,self.dfs(root.left.left)+self.dfs(root.left.right)+
+        #                     self.dfs(root.right.left)+self.dfs(root.right.right))
+
+    def dfs(self,root):
+        if not root:
+            return [0,0]
+        left = self.dfs(root.left)
+        right = self.dfs(root.right)
+        return [max(left)+max(right),root.val+left[0]+right[0]]
+
+    def rob(self,root):
+        res = self.dfs(root)
         return max(res)

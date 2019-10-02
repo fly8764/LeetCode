@@ -63,8 +63,38 @@ class Solution:
                     dp[i][j] = dp[i-1][j] + dp[i][j-1]
         return dp[-1][-1]
 
+class Solution1:
+    def uniquePathsWithObstacles(self, grid):
+        m = len(grid)
+        if m < 1:return 0
+        n = len(grid[0])
+        dp = [[0]*n for _ in range(m)]
+
+        for i in range(n):
+            if grid[0][i] == 0:
+                dp[0][i] = 1
+            else:break
+
+        for i in range(m):
+            if grid[i][0] == 0:
+                dp[i][0] = 1
+            else:break
+
+        for i in range(1,m):
+            for j in range(1,n):
+                if grid[i][j] == 0:
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1]
+        return dp[-1][-1]
+
 
 if __name__ == '__main__':
-    so = Solution()
-    res = so.uniquePathsWithObstacles([[0,0],[1,0]]) #[[0,0,0],[0,1,0],[0,0,0]] [[1]]
+    so = Solution1()
+    grid = [
+  [0,0,0],
+  [0,1,0],
+  [0,0,0]]
+    res = so.uniquePathsWithObstacles(grid) #[[0,0,0],[0,1,0],[0,0,0]] [[1]]
     print(res)
+    # grid = [[0,0,0],[0,1,0],[0,0,0]] [[1]]
+    # res = so.uniquePathsWithObstacles([[0,0],[1,0]]) #
+    # print(res)
