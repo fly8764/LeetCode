@@ -1,3 +1,6 @@
+'''
+这种方法能直接返回对应值的原始下标
+'''
 class Solution:
     def twoSum(self, nums, target):
         # 字典查值比较快

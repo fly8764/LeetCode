@@ -1,4 +1,4 @@
-class Solution:
+class Solution1:
 
     def fourSum(self, nums, target):
         size = len(nums)
@@ -53,6 +53,9 @@ class Solution:
                             res.append([nums[i],nums[j],nums[item[0]],nums[item[1]]])
         return res
 
+class Solution:
+    def fourSum(self, nums, target):
+        pass
 
 
 if __name__ == '__main__':

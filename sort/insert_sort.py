@@ -1,4 +1,4 @@
-class Solution:
+class Solution1:
     def __init__(self):
         self.size = 0
 
@@ -239,6 +239,31 @@ class Solution:
             dev *= 10
         return nums
 
+class Solution:
+    def quickSort(self,nums,s,t):
+        if s >=t:
+            return
+        # 这里需要额外的变量保存边界索引，
+        l,r = s,t
+        temp = nums[l]
+        while l < r:
+            while r > l and nums[r] > temp:
+                r -= 1
+            if r > l:
+                nums[l] = nums[r]
+                l += 1
+            while l < r and nums[l] < temp:
+                l += 1
+            if l < r:
+                nums[r] = nums[l]
+                r -= 1
+        nums[l] = temp
+        self.quickSort(nums,s,l-1)
+        self.quickSort(nums,l+1,t)
+
+    def heapSort(self,nums):
+        pass
+
 
 if __name__ == '__main__':
     so = Solution()
@@ -251,13 +276,13 @@ if __name__ == '__main__':
     # print(res2)
     # res3 = so.bubbleSort(nums[:])
     # print(res3,'bubbleSort')
-    # so.quickSort(nums,0,len(nums)-1)
-    # print(nums)
+    so.quickSort(nums,0,len(nums)-1)
+    print(nums)
     # res = so.mergeSort(nums)
     # print(res)
-    # res = so.heapSort(nums[:])
-    # print(res)
+    res = so.heapSort(nums[:])
+    print(res)
     # res = so.heapSortMin(nums[:])
     # print(res)
-    res = so.radixSort(nums[:])
-    print(res)
+    # res = so.radixSort(nums[:])
+    # print(res)
