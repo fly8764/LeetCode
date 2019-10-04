@@ -1,4 +1,4 @@
-class Solution:
+class Solution1:
     def maxProduct(self, nums):
         size = len(nums)
         res = max_sub = min_sub = nums[0]
@@ -33,6 +33,12 @@ class Solution:
         #     max_sub = max(max_sub,temp)
 
         return max_sub
+
+class Solution:
+    def maxProduct(self, nums):
+        size = len(nums)
+
+
 
 if __name__ == '__main__':
     so = Solution()

@@ -6,7 +6,7 @@
 #
 # 用字典来 随时动态地记录 结果，一边计算，一边查询结果
 # 这是 哈希表(字典）的 一大特点，优势。
-class Solution:
+class Solution1:
     #整数 和 k 均可为 负数
     def subarraySum(self, nums, k):
         size = len(nums)
@@ -23,6 +23,31 @@ class Solution:
             map[summ] = 1 + map.get(summ,0)
 
         return cnt
+
+class Solution:
+    def subarraySum(self, nums, k):
+        size = len(nums)
+        dic = {}
+        #这个初始化很重要，代表从数组的起始开始，连续数组和基本上都需要这个初始化
+        #当summ == k时，dic[0]=1，代表满足要求的连续子序列有一个
+        #否则会漏失一种可能
+        dic[0] = 1
+        cnt = 0
+        summ = 0
+        for i in range(size):
+            summ += nums[i]
+            if summ - k in dic:
+                cnt += dic[summ-k]
+            #下面往字典里存值的简便写法
+            dic[summ] = 1 + dic.get(summ,0)
+            # if summ not in dic:
+            #     dic[summ] = 1
+            # else:
+            #     dic[summ] += 1
+        return cnt
+
+
+
 
 if __name__ == '__main__':
     so = Solution()

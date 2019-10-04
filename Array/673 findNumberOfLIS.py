@@ -39,6 +39,7 @@ class Solution:
                         dp[i] = dp[j] + 1
                         cnt[i] = cnt[j]
                     elif dp[i] == dp[j]+1:
+                        #这一步非常重要，因为同样长度的序列，可能不止一种
                         cnt[i] += 1
                     #     dp[i] = dp[j] + 1
                     #     temp = lis[j] + [nums[i]]

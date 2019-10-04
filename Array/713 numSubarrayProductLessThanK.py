@@ -1,4 +1,4 @@
-class Solution:
+class Solution1:
 #双指针，链表中 会有较多的指针
     def numSubarrayProductLessThanK(self, nums, k):
         size = len(nums)
@@ -15,6 +15,32 @@ class Solution:
             cnt += right - left + 1
 
         return cnt
+
+class Solution:
+    def numSubarrayProductLessThanK(self, nums, k):
+        size = len(nums)
+        res = []
+        cur = []
+        temp = 1
+        for i in range(size):
+            if temp *nums[i] < k:
+                temp *= nums[i]
+                cur.append(nums[i])
+            else:
+                sub = []
+                for item in cur:
+                    sub.append(item)
+                    res.append(sub)
+                if nums[i] < k:
+                    cur = [nums[i]]
+                    temp = nums[i]
+                else:
+                    temp = 1
+                    cur = []
+        return res
+
+
+
 
 if __name__ == '__main__':
     so = Solution()
