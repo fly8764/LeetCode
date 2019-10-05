@@ -6,7 +6,7 @@
 空格、正负号、非数字字符（res长度是否为0），正常的字符
 '''
 class Solution:
-    def myAtoi(self, s):
+    def myAtoi1(self, s):
         size = len(s)
         neg = False
         res = ''
@@ -49,6 +49,9 @@ class Solution:
         if ans < -1*(1<<31):
             return -1*(1<<31)
         return ans
+
+    # def myAtoi(self, s: str) -> int:
+    #     return max(min(int(*re.findall('^[\+\-]?\d+', s.lstrip())), 2**31 - 1), -2**31)
 
 
 if __name__ == '__main__':
