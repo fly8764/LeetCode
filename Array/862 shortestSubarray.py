@@ -20,9 +20,11 @@ class Solution:
                 left = right + 1
                 continue
             #特殊情况，当遇到一个nums[i]远小于0，或其周围都是负数，则其对结果也没有帮助,
+            #但summ依然大于等于k，此时，把左边界往右移，减小summ，
             #将这种负数往前累加，同时把沿途的值置为0
             #这样能够极大加快左边界left的往右移动的速度，从而表面上看是o(n^2)，实际上要小于这种复杂度
             #这一点在下面的操作中尤为明显
+            #这里也不担心j < 0 呢？
             j = right -1
             while nums[j+1] < 0:
                 nums[j] += nums[j+1]
@@ -38,8 +40,6 @@ class Solution:
             return -1
         else:
             return minn
-
-
 
     # def shortestSubarray(self, nums, k):
     #     #不大于k的子序列中的最长子序列 方法 简单改动后，不行
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     so = Solution()
     nums = []
     k = 0
-    print(so.shortestSubarray(nums = [1], k = 1))
+    print(so.shortestSubarray(nums = [1], k=1))
     print(so.shortestSubarray(nums = [1,2], k = 4))
     print(so.shortestSubarray(nums = [2,-1,2], k = 3))
 

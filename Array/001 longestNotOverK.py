@@ -23,7 +23,7 @@ class Solution:
             while start < size and s+summ[start] <= k:
                 s += summ[start]
                 start = emap[start]+1 #从右边界的下一个位置再次计算，累加
-            #下一轮从i+1开始
+            #下一轮从i+1开始,所以累计和要减去nums[i],下面的操作就是判断长度，更新下一轮的start
             # 累计求和大于k,从i+1继续开始，累计和s-=nums[i]（分情况讨论）
             # 如果start == i，即上来summ[i]就大于k，则不进行操作，
             # 因为，s没有进行累加s += summ[start]
@@ -34,6 +34,7 @@ class Solution:
             #所以while循环出来时，s<= k,同时start是此次满足条件的右边界的下一位，
             #所以，长度 为start-i，而不是start-i+1
             maxx = max(maxx,start-i)
+            #start是当前数组的右边界，所以应该取右边界，较大值
             start = max(start,i+1)
         return maxx
 
