@@ -1,4 +1,12 @@
 # Definition for singly-linked list.
+'''
+方法一：递归法
+建立在已经解决好的子问题上
+先 last = self.reverseList(node.next)
+使得第二个节点（包括）以后的链表反转好，返回最后的头节点last
+然后 node.next.next = node  node.next = None
+反转第一、第二个节点之间的关系
+'''
 class ListNode:
     def __init__(self, x):
         self.val = x
@@ -20,7 +28,7 @@ class Solution:
     #     node.next = None
     #     return start
 
-    def reverseList(self, node):
+    def reverseList1(self, node):
         #迭代
         if not node:
             return node
@@ -32,3 +40,14 @@ class Solution:
             pre = p
             node = node.next
         return p
+
+    def reverseList(self, node):
+        if not node:
+            return node
+        if not node.next:
+            return node
+        last = self.reverseList(node.next)
+        node.next.next = node
+        node.next = None
+        return last
+
