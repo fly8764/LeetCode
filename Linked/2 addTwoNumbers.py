@@ -4,7 +4,7 @@ class ListNode:
         self.val = x
         self.next = None
 
-class Solution:
+class Solution1:
     def addTwoNumbers1(self, l1, l2):
         #新建一个链表
         pre = 0
@@ -78,6 +78,69 @@ class Solution:
             pre_l1.next = ListNode(pre)
         # return start.next
         return start
+
+'''
+2020/12/13 18:45
+按照定义做即可
+去个位和十位的值可以使用以下方式：
+cur = temp % 10
+pre = temp // 10
+
+其实可以将三个写到一个while循环里面，使用or连接即可。
+'''
+
+class Solution:
+    def addTwoNumbers(self, l1, l2):
+        if not l1 and not l2:
+            return
+
+        p = 0
+        dummy = ListNode(-1)
+        pre = dummy
+        while l1 and l2:
+            tmp = l1.val + l2.val + p
+            if tmp >= 10:
+                node = ListNode(tmp-10)
+                p = 1
+            else:
+                node = ListNode(tmp)
+                p = 0
+            pre.next = node
+            pre = node
+            l1 = l1.next
+            l2 = l2.next
+
+        while l1:
+            tmp = l1.val  + p
+            if tmp >= 10:
+                node = ListNode(tmp-10)
+                p = 1
+            else:
+                node = ListNode(tmp)
+                p = 0
+            pre.next = node
+            pre = node
+            l1 = l1.next
+
+        while l2:
+            tmp = l2.val  + p
+            if tmp >= 10:
+                node = ListNode(tmp-10)
+                p = 1
+            else:
+                node = ListNode(tmp)
+                p = 0
+            pre.next = node
+            pre = node
+            l2 = l2.next
+
+        if p:
+            node = ListNode(p)
+            pre.next = node
+
+        return dummy.next
+
+
 
 
 if __name__ == '__main__':

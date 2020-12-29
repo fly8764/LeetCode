@@ -178,7 +178,7 @@ class Solution:
         while bit:
             bit -= 1
             dic = {}
-            #各个bit为上的值分桶
+            #各个bit位上的值分桶
             for i in range(size):
                 bucket = nums[i]%mod//dev
                 if bucket not in dic:

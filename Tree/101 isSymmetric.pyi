@@ -75,7 +75,7 @@ class Solution1:
         else:
             return False
 
-class Solution:
+class Solution2:
     #递归
     def isSymmetric1(self,root):
         queue = [root,root]
@@ -106,5 +106,92 @@ class Solution:
         res= self.mirros(root,root)
         if res:return True
         else:return False
+
+'''
+2020/12/7 23:09
+方法一 迭代（递推）
+迭代其实相当于一种递推（重点），在上一次已满足条件的情况下，去判断下一次。
+在一个队列中取出两个对称的节点，去判断其孩子节点是否对称，即left.left == right.right  left.right == right.left
+每次把位置对称的两个节点放到队尾，这样下一次迭代时，从队首取出的两个节点才能继续往下判断是否对称。
+考虑到空接点，要分四种情况讨论，都为空节点，有一个是空节点，都不是空节点。其中都为空节点的，continue继续下一次迭代
+递归的起始状态：[root,root] 这一点不好想到
+
+方法二 递归
+类似于方法一
+框架：
+left.left == right.right  left.right == right.left
+递归函数的起始判断条件，依然是那四种情况，进行讨论。
+其中在left.val == right.val时，要使用递归继续判断。
+
+感悟：
+树的题目要结合树的结构特点。
+'''
+class Solution:
+    # 超时
+    def isSymmetric1(self,root):
+        if not root:
+            return True
+        res = []
+        parent = [root]
+        while parent:
+            tem_res = []
+            child = []
+            for node in parent:
+                if node:
+                    tem_res.append(node.val)
+                else:
+                    tem_res.append(None)
+                if node.left:
+                    child.append(node.left)
+                else:
+                    child.append(None)
+                if node.right:
+                    child.append(node.right)
+                else:
+                    child.append(None)
+            if tem_res != tem_res[::-1]:
+                return False
+
+        return True
+
+    def isSymmetric2(self, root):
+        if not root:
+            return True
+        queue = [root,root]
+
+        while queue:
+            left = queue.pop(0)
+            right = queue.pop(0)
+
+            if not left and not right:
+                continue
+            if not left or not right:
+                return False
+            if left.val != right.val:
+                return False
+            queue.extend([left.left,right.right])
+            queue.extend([left.right,right.left])
+
+        return True
+
+    def mirror(self,left,right):
+        if not left and not right:
+            return True
+        if not left or not right:
+            return False
+        if left.val == right.val:
+            return self.mirror(left.left,right.right) and self.mirror(left.right,right.left)
+
+
+    def isSymmetric(self, root):
+        if not root:
+            return True
+        return self.mirror(root,root)
+
+
+
+
+
+
 
 

@@ -27,7 +27,7 @@ class ListNode:
         self.val = x
         self.next = None
 
-class Solution:
+class Solution1:
     def __init__(self):
         self.successor = None
 
@@ -143,6 +143,7 @@ class Solution:
         for _ in range(n-m):
             temp = cur.next
             cur.next = temp.next
+            # 下面只能用 pre.next，不能用cur，cur只在刚开始可以，后面就不行了，pre.next最准。
             temp.next = pre.next
             pre.next = temp
 
@@ -175,6 +176,86 @@ class Solution:
             return self.reverseN(head,n)
         head.next = self.reverseBetween(head.next,m-1,n-1)
         return head
+
+'''
+2020/12/13 16:40
+第二次做，一上来就去找交界处左右两边的点，一共四个点，然后把m-n的节点反转，最后再重新连接到原链表上。
+起始只要找到第m-1个节点即可，然后 in-place的方式直接在原链表上进行修改，比较间接。
+注意：反转链表时注意细节，
+        cur = pre.next
+        for _ in (n-m):
+            tmp = cur.next
+            cur.next = tmp.next
+            # 下面只能用 pre.next，不能用cur，cur只在刚开始可以，后面就不行了，pre.next最准。
+            tmp.next = pre.next
+            pre.next = tmp
+'''
+class Solution:
+    # 常规做法
+    def reverseBetween1(self, head, m, n):
+        if not head or not head.next:
+            return head
+
+        dummy = ListNode(-1)
+        dummy.next = head
+        left,right = head,head
+        first = dummy
+        tail = head.next
+        l,r = 1,1
+        while r < n:
+            r += 1
+            right = right.next
+            tail = tail.next
+        while l < m:
+            l += 1
+            left = left.next
+            first = first.next
+        s,e = m,n
+        pre = None
+        mnode = None
+        mflag = True
+        while s <= e:
+            s += 1
+            node = ListNode(left.val)
+            if mflag:
+                mnode = node
+                mflag = False
+            node.next = pre
+            pre = node
+            left = left.next
+        first.next = pre
+        mnode.next = tail
+
+        return dummy.next
+
+    # 简便一些
+    def reverseBetween(self, head, m, n):
+        if not head or not head.next:
+            return head
+
+        dummy = ListNode(-1)
+        dummy.next = head
+        pre = dummy
+
+        for _ in range(m-1):
+            pre = pre.next
+
+        cur = pre.next
+        for _ in (n-m):
+            tmp = cur.next
+            cur.next = tmp.next
+            tmp.next = pre.next
+            pre.next = tmp
+
+        return dummy.next
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     so = Solution()

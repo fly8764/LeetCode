@@ -10,7 +10,7 @@ class ListNode(object):
         self.val = x
         self.next = None
 
-class Solution(object):
+class Solution1(object):
     def hasCycle(self, head):
         # if not head or not head.next:
         #     return False
@@ -43,5 +43,36 @@ class Solution(object):
             head.val = maxx
             head = head.next
         return False
+
+'''
+2020/12/13 11:35
+方法一 标记法
+
+空间复杂度为 o(l)，但是会修改链表
+
+
+方法二 快慢指针法
+快指针每次走两步，慢指针每次走一步，同时出发，在环外不会相遇，一定在环内相遇。
+在环内，相当于快指针在追慢指针，慢指针不动，快指针一步一步地追赶。
+其中循环条件直接判断fast是否为尾节点即可，毕竟fast走的快，走在前面；然后在循环中判断节点是否相同。
+而不是在while 条件中去判断是否相等，while条件判断是否为尾节点。
+空间复杂度为 o(l)，同时不会修改链表
+
+第二次没想到快慢指针法，看答案后，对while循环条件一上来没想清楚。
+'''
+class Solution:
+    def hasCycle(self, head):
+        if not head or not head.next:
+            return False
+
+        slow = head
+        fast = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:
+                return True
+        return False
+
 
 

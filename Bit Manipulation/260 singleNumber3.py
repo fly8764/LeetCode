@@ -1,4 +1,4 @@
-class Solution:
+class Solution1:
     def singleNumber(self, nums):
         #位运算  T(n) = n O(n) = l
         xor = 0
@@ -34,6 +34,40 @@ class Solution:
             if value == 1:
                 res.append(key)
         return res
+
+
+'''
+2020/12/13 15:38
+方法一 位运算 异或
+类似于136题的异或操作，把所有的数异或一次，这样会得到两个单独数的异或结果res。
+然后找到res二进制中最右边的1所在的位置
+法一：a^(-a)
+法二：与和左移
+a
+mask = 1
+while(mask&a == 0):
+    mask <<= 1
+'''
+
+class Solution:
+    def singleNumber(self, nums):
+        res = 0
+        for num in nums:
+            res ^= num
+
+        single = [0,0]
+        # 找到最右边的1位置
+        mask = res&(-res)
+        for num in nums:
+            if mask & num == 0:
+                single[0] ^= num
+            else:
+                single[1] ^= num
+
+        return single
+
+
+
 
 
 if __name__ == '__main__':

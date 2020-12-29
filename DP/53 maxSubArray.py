@@ -57,7 +57,7 @@ dp[i-1]<=0,对结果无益，不接，dp[i] = nums[i]，
 所以，最终可以简化，仅仅使用两个标量即可，就形成了“正数增益”的方法。
 
 '''
-class Solution:
+class Solution2:
     def maxSubArray(self, nums):
         #二分法 把数组分为左右两半，最终结果可能出现的三种情况 T(n) = nlogn
         #左边、右边、左边一部分+右边一部分
@@ -102,6 +102,64 @@ class Solution:
     #     for i in range(1,size):
     #         dp[i] = max(dp[i-1]+nums[i],nums[i])
     #     return max(dp)
+
+class Solution:
+    def maxSubArray1(self, nums):
+        n = len(nums)
+        if n < 1:return 0
+
+        dp = nums[:]
+        for i in range(1,n):
+            if dp[i-1] > 0:
+                dp[i] = dp[i-1]+nums[i]
+        return max(dp)
+
+    def maxSubArray2(self,nums):
+        length = len(nums)
+        if length== 1:
+            return nums[0]
+        else:
+            max_left = self.maxSubArray(nums[0:length//2])
+            max_right = self.maxSubArray(nums[length//2:])
+
+        temp_l = 0
+        max_tmp_l = nums[length//2-1]
+        for i in range(length//2-1,-1,-1):
+            temp_l += nums[i]
+            max_tmp_l = max(max_tmp_l,temp_l)
+
+        tmp_r = 0
+        max_tmp_r = nums[length//2]
+        for j in range(length//2,length):
+            tmp_r += nums[j]
+            max_tmp_r = max(max_tmp_r,tmp_r)
+
+        tmp = max_tmp_l+ max_tmp_r
+
+        return max(max_left,max_right,tmp)
+
+    def maxSubArray(self, nums):
+        #二分法 把数组分为左右两半，最终结果可能出现的三种情况 T(n) = nlogn
+        #左边、右边、左边一部分+右边一部分
+        #其中第三种情况，在求左边时，要从右往左遍历，求右边时要从左往右遍历
+        size = len(nums)
+        if size == 1:
+            return nums[0]
+        else:
+            max_left = self.maxSubArray(nums[:size//2])
+            max_right = self.maxSubArray(nums[size//2:])
+        max_l = nums[size//2-1]
+        temp = 0
+        for i in range(size//2-1,-1,-1):
+            temp += nums[i]
+            max_l = max(max_l,temp)
+
+        max_r = nums[size//2]
+        temp = 0
+        for i in range(size//2,size):
+            temp += nums[i]
+            max_r = max(max_r,temp)
+        return max(max_left,max_right,max_l+max_r)
 
 
 

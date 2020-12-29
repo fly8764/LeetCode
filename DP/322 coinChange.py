@@ -1,4 +1,4 @@
-class Solution:
+class Solution4:
     def coinChange(self, coins, amount):
         dp = [999999]*(amount+1)
         dp[0]= 0
@@ -56,6 +56,34 @@ class Solution3:
     def coinChange(self,coin,target):
         pass
 
+'''
+2020/11/30 23:31
+完全背包问题
+dp[i][j]:前i个商品，达到价值j，用到的最少硬币数。
+空间优化可以到一维。
+其中两层循环有两种写法，一种是常规的完全背包问题写法。
+另一种：第一层循环重量，第二层循环各种硬币，看当前重量下，使用哪种硬币可以使得用的硬币数量较少。
+'''
+class Solution:
+    def coinChange(self, coins, amount):
+        size = len(coins)
+        dp = [float('inf')]*(amount+1)
+        dp[0] = 0
+
+        for i in range(size):
+            for j in range(coins[i],amount+1):
+                dp[j] = min(dp[j],dp[j-coins[i]]+1)
+
+        # for j in range(1,amount+1):
+        #     for coin in coins:
+        #         if coin <= j:
+        #             dp[j] = min(dp[j], dp[j - coin]+1)
+        if dp[-1] == float('inf'):
+            return -1
+        else:
+            return dp[-1]
+
+
 
 if __name__ == '__main__':
     so = Solution()
@@ -66,5 +94,15 @@ if __name__ == '__main__':
 
     coins = [1, 2, 5]
     amount = 11
+    res = so.coinChange(coins,amount)
+    print(res)
+
+    coins = [1]
+    amount = 0
+    res = so.coinChange(coins,amount)
+    print(res)
+
+    coins = [1]
+    amount = 1
     res = so.coinChange(coins,amount)
     print(res)

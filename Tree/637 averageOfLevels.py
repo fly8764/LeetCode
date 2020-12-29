@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-class Solution:
+class Solution1:
     def averageOfLevels(self, root) :
         if not root:
             return []
@@ -28,3 +28,27 @@ class Solution:
             parent = child[:]
 
         return res
+
+'''
+2020/12/7 22:45
+'''
+class Solution:
+    def averageOfLevels(self, root) :
+        if not root:
+            return []
+
+        res = []
+        parent = [root]
+        while parent:
+            tmp_res = []
+            children = []
+            for node in parent:
+                tmp_res.append(node.val)
+                if node.left:
+                    children.append(node.left)
+                if node.right:
+                    children.append(node.right)
+            res.append(sum(tmp_res)/len(tmp_res))
+            parent = children[:]
+        return res
+

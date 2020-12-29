@@ -1,4 +1,4 @@
-class Solution:
+class Solution2:
     def change(self, amount, coins):
         size = len(coins)
         dp = [0]*(amount+1)
@@ -31,7 +31,23 @@ class Solution1:
 
         # print(dp)
         return dp[-1][-1]
+'''
+2020/12/1 0:09
+完全背包问题，计数型，不是求最值型
+1.优化空间后的一维数组，顺序计算。
+2.两种for循环方式
 
+'''
+class Solution:
+    def change(self, amount, coins):
+        n = len(coins)
+
+        dp = [0]*(amount+1)
+        dp[0] = 1
+        for i in range(n):
+            for j in range(coins[i],amount+1):
+                dp[j] += dp[j-coins[i]]
+        return dp[-1]
 
 if __name__ == '__main__':
     so = Solution()

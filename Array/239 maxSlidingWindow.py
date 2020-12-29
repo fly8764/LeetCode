@@ -7,7 +7,7 @@
 长度在k内；
 在往结果中存值时，要保证添加元素的下标和当前位置i的距离在k之内
 '''
-class Solution:
+class Solution1:
     def maxSlidingWindow(self, nums, k):
         from collections import deque
         size = len(nums)
@@ -23,9 +23,56 @@ class Solution:
             while q and nums[q[-1]] <= nums[i]:
                 q.pop()
             q.append(i)
-            if i -k + 1 >= 0:
+            # 保证现在滑动窗口的长度在k内
+            if i >= k - 1:
                 res.append(nums[q[0]])
         return res
+
+
+'''
+2020/12/20 0:10
+方法一 单调队列
+
+方法二 优先队列（二叉堆）
+
+
+'''
+
+class Solution:
+    # 暴力法，超时
+    def maxSlidingWindow(self, nums, k):
+        n = len(nums)
+        res = []
+        for i in range(n-k+1):
+            res.append(max(nums[i:i+k]))
+        return res
+
+    def maxSlidingWindow2(self, nums, k):
+        n = len(nums)
+        res = []
+        if n < 1:
+            return res
+        q = []
+        for i in range(n):
+            # 维持窗口宽度,当超出宽度时，从对首删除元素，而不是队尾。
+            if q and i - q[0] + 1 > k:
+                q.pop(0)
+            # 把单调递减队列中的尾部元素和新值比较，小于新值的删除，最后把新值添加到队列末尾。
+            while q and nums[q[-1]] <= nums[i]:
+                q.pop()
+            # 这里添加的是新元素的下标，不是新值，
+            q.append(i)
+            #保证当前的位置i能构成一个窗口
+            if i >= k-1:
+                res.append(nums[q[0]])
+        return res
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 """
 方法一：双指针法
-左指针max_left:代表到目前位置i为止左边的最大高度，不包括位置i的高度
+左指针max_left[i]:代表到目前位置i为止左边的最大高度，不包括位置i的高度
 右指针max_right[i]：代表位置i右边的最大高度，也不包括位置i的高度
 单方向遍历：
 从左往右，因为每次位置i只用到了前面的一个位置的值，所以可以使用一个变量max_left来
@@ -24,6 +24,10 @@ class Solution:
             if minn > height[i]:
                 res += minn - height[i]
         return  res
+
+class Solution2:
+    def trap(self, height):
+        n = len(height)
 
 
 if __name__ == '__main__':

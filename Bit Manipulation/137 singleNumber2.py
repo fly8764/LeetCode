@@ -16,9 +16,3 @@ class Solution(object):
                 res.pop(num)
         return res.popitem()[0]
 
-    def singleNumber0(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-

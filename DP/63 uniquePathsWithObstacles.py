@@ -1,5 +1,10 @@
+'''
+一上来第一反应，分类讨论，四种情况；
+其实只有计算位置[i][j]不是障碍物，就可以直接计算，像62题那样。
+因为如果上面或左面有障碍物，默认dp为0，加上去也无效。
+'''
 class Solution:
-    def uniquePathsWithObstacles(self, obstacleGrid):
+    def uniquePathsWithObstacles3(self, obstacleGrid):
         m = len(obstacleGrid)
         n = len(obstacleGrid[0])
 
@@ -63,6 +68,41 @@ class Solution:
                     dp[i][j] = dp[i-1][j] + dp[i][j-1]
         return dp[-1][-1]
 
+    def uniquePathsWithObstacles(self, obstacleGrid):
+        m = len(obstacleGrid)
+        n = len(obstacleGrid[0])
+
+        dp = [[0]*n for _ in range(m)]
+        for i in range(n):
+            if not obstacleGrid[0][i]:
+                dp[0][i] = 1
+            else:
+                break
+
+        for j in range(m):
+            if not obstacleGrid[j][0]:
+                dp[j][0] = 1
+            else:
+                break
+
+        for i in range(1,m):
+            for j in range(1,n):
+                '''
+                一上来第一反应，分类讨论，四种情况；
+                其实只有计算位置[i][j]不是障碍物，就可以直接计算，像62题那样。
+                因为如果上面或左面有障碍物，默认dp为0，加上去也无效。
+                '''
+                # if not obstacleGrid[i-1][j] and not obstacleGrid[i][j-1]:
+                #     dp[i][j] = dp[i][j-1] + dp[i-1][j]
+                # elif not obstacleGrid[i-1][j] and obstacleGrid[i][j-1]:
+                #     dp[i][j] = dp[i-1][j]
+                # elif obstacleGrid[i-1][j] and not obstacleGrid[i][j-1]:
+                #     dp[i][j] = dp[i - 1][j]
+                if not obstacleGrid[i][j]:
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1]
+
+        return dp[-1][-1]
+
 class Solution1:
     def uniquePathsWithObstacles(self, grid):
         m = len(grid)
@@ -88,7 +128,7 @@ class Solution1:
 
 
 if __name__ == '__main__':
-    so = Solution1()
+    so = Solution()
     grid = [
   [0,0,0],
   [0,1,0],

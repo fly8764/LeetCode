@@ -13,13 +13,13 @@
 则不符合定义，返回False。
 '''
 
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
-class Solution:
+class Solution1:
     #     def isValidBST(self, root: TreeNode) -> bool:
     #         result =  self.dfs(root)
     #         if sorted(list(set(result))) ==result:#使用set()排除相等项 左子树小于(不是小于等于)根节点
@@ -85,4 +85,70 @@ class Solution:
         # if root.val > left_max and root.val < right_min:
         #     mid = True
         # return (left and right and mid), left_min, right_max
+'''
+2020/12/8 1:38
+第二次没做出来
+
+方法一 中序遍历
+利用二叉搜索树的性质：中序遍历是一个严格的递增数列
+
+方法二 递归
+搞清楚递归的模板和流程，然后注意其中的细节
+每次递归需要返回该节点为根节点的BST的有效结果、该树的最大值（在其右子树上或root）、该树的最小值（在其左子树上或root）
+注意在节点为空时，如何设置其最大最小值
+'''
+class Solution:
+    # 利用二叉搜索树的性质：中序遍历是一个严格的递增数列
+    def isValidBST1(self, root):
+        res = []
+        stack = []
+        p = root
+        while p or stack:
+            while p:
+                stack.append(p)
+                p = p.left
+            node = stack.pop()
+            res.append(node.val)
+            p = node.right
+        res_new = list(set(res))
+        res_new.sort()
+
+        return res == res_new
+
+    def dfs(self,root):
+        if not root.left and not root.right:
+            return True,root.val,root.val
+
+        # 返回左子树的有效情况、最大值、最小值
+        # 当左子树不存在时，因为要返回左子树的最小值，此时为root.val;
+        # 对该根节点进行比较判断左子树的最大值时，left_max一定要小于root.val，
+        # 所以赋值为root.val - 1
+        if root.left:
+            left,left_min,left_max = self.dfs(root.left)
+        else:
+            left = True
+            left_max,left_min = root.val  - 1, root.val
+
+        # 返回右子树的有效情况、最大值、最小值
+        # 当右子树不存在时，因为要返回右子树的最大值，此时为root.val;
+        # 对该根节点进行比较判断右子树的最小值时，right_min一定要大于root.val，
+        # 所以赋值为root.val + 1
+        if root.right:
+            right, right_min, right_max = self.dfs(root.right)
+        else:
+            right = True
+            right_max,right_min = root.val,root.val + 1
+
+        mid = False
+        if root.val > left_max and root.val < right_min:
+            mid = True
+
+        return (left and right and mid), left_min, right_max
+
+
+    def isValidBST(self, root):
+        if not root:return True
+        res,_,_ = self.dfs(root)
+        return res
+
 
